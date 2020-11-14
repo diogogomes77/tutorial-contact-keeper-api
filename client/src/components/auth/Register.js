@@ -12,7 +12,7 @@ const Register = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push('/');
+      props.history.push('/'); // redirect to home page
     }
     if (error === 'User already exists') {
       setAlert(error, 'danger');

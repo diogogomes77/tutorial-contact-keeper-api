@@ -26,7 +26,7 @@ const Login = (props) => {
     password: '',
   });
 
-  const { name, email, password } = user;
+  const { email, password } = user;
 
   const onChange = (e) =>
     setUser({
