@@ -17,3 +17,15 @@ https://www.mongodb.com/
 Postman Download:
 
 https://www.getpostman.com/
+
+## Heroku
+
+brew tap heroku/brew && brew install heroku
+
+heroku login
+
+heroku create
+
+heroku git:remote -a dgomes-contact-keeper
+
+git push heroku main
