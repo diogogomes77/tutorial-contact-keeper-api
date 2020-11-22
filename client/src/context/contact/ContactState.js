@@ -20,28 +20,6 @@ import {
 const ContactState = (props) => {
   const initialState = {
     contacts: null,
-    /*  {
-        id: 1,
-        name: 'Jill1 Johnson',
-        email: 'jill1@gmail.com',
-        phone: '111-111-1111',
-        type: 'personal',
-      },
-      {
-        id: 2,
-        name: 'Jill2 Johnson',
-        email: 'jill2@gmail.com',
-        phone: '222-111-1111',
-        type: 'professional',
-      },
-      {
-        id: 3,
-        name: 'Jill3 Johnson',
-        email: 'jill3@gmail.com',
-        phone: '333-111-1111',
-        type: 'personal',
-      },
-    ],*/
     current: null,
     filtered: null,
   };
@@ -89,6 +67,29 @@ const ContactState = (props) => {
     }
   };
 
+  // Update Contact
+  const updateContact = async (contact) => {
+    // contact.id = uuid();
+    const config = {
+      // token is already set as global in setAuthToken
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.put(
+        `/api/contacts/${contact._id}`,
+        contact,
+        config,
+      );
+
+      dispatch({ type: UPDATE_CONTACT, payload: res.data });
+    } catch (err) {
+      dispatch({ type: CONTACT_ERROR, payload: err.response.msg });
+    }
+  };
+
   // Set Current Contact
   const setCurrent = (contact) => {
     dispatch({ type: SET_CURRENT, payload: contact });
@@ -102,11 +103,6 @@ const ContactState = (props) => {
   // Clear Contacts
   const clearContacts = () => {
     dispatch({ type: CLEAR_CONTACTS });
-  };
-
-  // Update Contact
-  const updateContact = (contact) => {
-    dispatch({ type: UPDATE_CONTACT, payload: contact });
   };
 
   // Filter Contacts
